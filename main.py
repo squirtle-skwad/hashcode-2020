@@ -1,8 +1,9 @@
 from preprocess import load_data
 from algorithm import run_algo
+from write_output import write_to_output_file
 
-INPUT_FILE = './data/a.txt'
+INPUT_FILE = './data/b.txt'
 
 if __name__ == "__main__":
   scores, L, d = load_data(INPUT_FILE)
-  run_algo(scores, L, d)
+  write_to_output_file(run_algo(scores, L, d))

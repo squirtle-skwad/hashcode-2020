@@ -1,26 +1,13 @@
 
 
-def score_list_sum(books, flag_book_id):
+def score_list_sum(books):
     book_score = 0
+    book_id_list = []
     for book in books:
-        if book[0] in flag_book_id:
-            pass
-        else:
-            book_score += book[1]
-    return book_score
+        book_score += book[1]
+        book_id_list.append(book[0])
+    return book_score, book_id_list
     
-def get_flagged_books(books, flag_book_id):
-    flag_list_id = []
-    flag_list_books = []
-    for i in range(0,len(books)):
-        if books[i][0] in flag_book_id:
-            flag_list_id.append(i)
-    for index in flag_list_id:
-        flag_list_books.append(books[index])
-        books.pop(index)
-    books_sorted = sorted(books, key=lambda e: e[1], reverse=True)
-    #print(books_sorted)
-    return score_list_sum(books_sorted+flag_list_books, flag_book_id), books_sorted+flag_list_books 
 
 def run_algo(scores, L, d):
          
@@ -29,40 +16,43 @@ def run_algo(scores, L, d):
     L: list of dicts, having properties of libraries
     d: int, deadline
   """
-  flag_book_id = []
   
   # This is list of (id, score), whereas scores is list of score only
   #scores_sorted = sorted(enumerate(scores), key=lambda e: e[1], reverse=True)
-  for i in range(0,2):
+  final_result = []
+  while d != 0:
+      if len(L) == 0:
+          break
       L_list = []
       for library in L:
           #book_list = get_flagged_books(library["books"])
-          book_score, book_list = get_flagged_books(library["books"], flag_book_id)
-          library["books"] = book_list
+          book_score, book_id_list =score_list_sum(library["books"])
           score = book_score*library["rate"]/library["signup"]
-          L_list.append([score, library["id"],  book_list, library["signup"]])
+          L_list.append([score, library["id"],  book_id_list, library["signup"]])
       
       L_sorted = sorted(L_list, key=lambda e: e[0], reverse=True)
       selected_library = L_sorted[0]  
       
+      for i in range(0, len(L)):
+          if L[i]["id"] == selected_library[1]:
+              remove_index= i
+              break
+      L.pop(remove_index)
+      d -= selected_library[3]
       
-      for book in selected_library[2]:
-          if book[0] in flag_book_id:
-              pass
-          else:
-              flag_book_id.append(book[0])
-    
-      print(selected_library[3])
+      if d < 0:
+          break
+      final_result.append({
+            "lib_id": selected_library[1],
+            "books_order": selected_library[2]
+        })
+     
+  return final_result
         
 """        
   
   
-  for i in range(0, len(L)):
-      if L[i]["id"] == selected_library[1]:
-          remove_index= i
-          break
-  L.pop(remove_index)
-  
+
 
 """
   #print(f"scores = {scores}")
