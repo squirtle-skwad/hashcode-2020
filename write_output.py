@@ -1,4 +1,4 @@
-OUTPUT_FILE_PATH = './d_output.txt'
+OUTPUT_FILE_PATH = './e_output.txt'
 
 def write_to_output_file(library_list):
     with open(OUTPUT_FILE_PATH, 'w') as output_file:
