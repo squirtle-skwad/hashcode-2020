@@ -1,26 +1,17 @@
-import os
+OUTPUT_FILE_PATH = './output.txt'
 
-
-OUTPUT_FILE_PATH = os.path.abspath('./output.txt')
-
-
-def write_to_output_file(libraries):
+def write_to_output_file(library_list):
     with open(OUTPUT_FILE_PATH, 'w') as output_file:
-        no_of_libraries = len(libraries)
-        output_file.write(str(no_of_libraries) + '\n\n')
+        output_file.write(str(len(library_list)) + '\n')
 
-        for library in libraries:
+        for library in library_list:
             library_id = library["lib_id"]
-            no_of_books = len(library["books_order"])
+            num_books = len(library["books_order"])
 
-            output_file.write(str(library_id) + " " + str(no_of_books) + "\n")
-
-            books_order_str = ""
-            for book in library["books_order"]:
-                books_order_str += str(book) + " "
-            books_order_str.rstrip()
-
-            output_file.write(books_order_str + "\n\n")
+            output_file.write(f"{library_id} {num_books}\n")
+            
+            books_order_str = ' '.join(map(str, library["books_order"]))
+            output_file.write(books_order_str + "\n")
 
 
 if __name__ == "__main__":
