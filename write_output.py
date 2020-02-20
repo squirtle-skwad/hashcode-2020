@@ -1,4 +1,4 @@
-OUTPUT_FILE_PATH = './output.txt'
+OUTPUT_FILE_PATH = './d_output.txt'
 
 def write_to_output_file(library_list):
     with open(OUTPUT_FILE_PATH, 'w') as output_file:
@@ -12,18 +12,3 @@ def write_to_output_file(library_list):
             
             books_order_str = ' '.join(map(str, library["books_order"]))
             output_file.write(books_order_str + "\n")
-
-
-if __name__ == "__main__":
-    libraries = [
-        {
-            "lib_id": 1,
-            "books_order": [0,1,2,3,4]
-        },
-        {
-            "lib_id": 2,
-            "books_order": [5,6,7]
-        }
-    ]
-
-    write_to_output_file(libraries)

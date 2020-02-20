@@ -1,5 +1,3 @@
-
-
 def score_list_sum(books):
     book_score = 0
     book_id_list = []
@@ -48,18 +46,3 @@ def run_algo(scores, L, d):
         })
      
   return final_result
-        
-"""        
-  
-  
-
-
-"""
-  #print(f"scores = {scores}")
-  #print(f"scores_sorted = {scores_sorted}")
-  #print(f"deadline d = {d}")
-
-  #import json
-  #print(f"libraries L = {json.dumps(L, indent=2)}")
-
-
