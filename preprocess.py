@@ -19,10 +19,12 @@ def load_data(filename):
       # Book indices
       bs = list(map(int, l.split()))
 
+      # Sorted books
+      bs_sorted = list(sorted(enumerate(bs), key=lambda e: e[1], reverse=True))
+
       L.append({
         "num_books": LnB,
-        "books": bs,
-        "book_scores": list(map(lambda i: scores[i], bs)),
+        "books": bs_sorted,
         "signup": sD,
         "rate": r,
       })
