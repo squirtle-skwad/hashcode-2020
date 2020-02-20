@@ -20,7 +20,7 @@ def write_to_output_file(libraries):
                 books_order_str += str(book) + " "
             books_order_str.rstrip()
 
-            output_file.write(str(books_order_str) + "\n\n")
+            output_file.write(books_order_str + "\n\n")
 
 
 if __name__ == "__main__":
