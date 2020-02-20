@@ -23,6 +23,7 @@ def load_data(filename):
       bs_sorted = list(sorted(map(lambda i: (i, scores[i]), bs), key=lambda e: e[1], reverse=True))
 
       L.append({
+        "id": len(L),
         "num_books": LnB,
         "books": bs_sorted,
         "signup": sD,
