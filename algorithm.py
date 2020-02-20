@@ -1,6 +1,12 @@
 
 def run_algo(scores, L, d):
-  # id, score
+  """
+    scores: list of scores, where index is book id
+    L: list of dicts, having properties of libraries
+    d: int, deadline
+  """
+
+  # This is list of (id, score), whereas scores is list of score only
   scores_sorted = sorted(enumerate(scores), key=lambda e: e[1], reverse=True)
 
   print(f"scores = {scores}")
