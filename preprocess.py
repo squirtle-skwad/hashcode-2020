@@ -20,7 +20,7 @@ def load_data(filename):
       bs = list(map(int, l.split()))
 
       # Sorted books
-      bs_sorted = list(sorted(enumerate(bs), key=lambda e: e[1], reverse=True))
+      bs_sorted = list(sorted(map(lambda i: (i, scores[i]), bs), key=lambda e: e[1], reverse=True))
 
       L.append({
         "num_books": LnB,
