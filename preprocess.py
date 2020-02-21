@@ -17,8 +17,8 @@ def load_data(filename):
 
       l = f.readline()
       # Book indices
-      bs = list(map(int, l.split()))
-
+      bs = tuple(map(int, l.split()))
+      #print("bs: "+str(bs))
       # Sorted books
       bs_sorted = list(sorted(map(lambda i: (i, scores[i]), bs), key=lambda e: e[1], reverse=True))
 

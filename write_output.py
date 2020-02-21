@@ -1,6 +1,7 @@
-OUTPUT_FILE_PATH = './e_output.txt'
 
-def write_to_output_file(library_list):
+def write_to_output_file(library_list, file_name):
+    OUTPUT_FILE_PATH = './'+file_name+'.txt'
+
     with open(OUTPUT_FILE_PATH, 'w') as output_file:
         output_file.write(str(len(library_list)) + '\n')
 
