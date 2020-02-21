@@ -14,11 +14,12 @@ def run_algo(scores, L, d):
     L: list of dicts, having properties of libraries
     d: int, deadline
   """
-  
   # This is list of (id, score), whereas scores is list of score only
   #scores_sorted = sorted(enumerate(scores), key=lambda e: e[1], reverse=True)
+
   final_result = []
-  while d != 0:
+  while d <= 0:
+      
       if len(L) == 0:
           break
       L_list = []
@@ -37,9 +38,6 @@ def run_algo(scores, L, d):
               break
       L.pop(remove_index)
       d -= selected_library[3]
-      
-      if d < 0:
-          break
       final_result.append({
             "lib_id": selected_library[1],
             "books_order": selected_library[2]
