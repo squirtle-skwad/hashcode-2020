@@ -1,14 +1,23 @@
+
+flag_book_set = set()
 def score_list_sum(books):
     book_score = 0
-    book_id_list = []
     for book in books:
         book_score += book[1]
-        book_id_list.append(book[0])
-    return book_score, book_id_list
+    return book_score
     
+def get_book_order(books):
+    remove_list = []
+    for i in range(0, len(books)):
+        if books[i] in flag_book_set:
+            remove_list.append(books[i])
+        
+    return sorted(list(set(books)-set(remove_list)), key=lambda e: e[1], reverse=True)+remove_list 
 
 def run_algo(scores, L, d):
-         
+    #    print(LL)
+  # print(L)
+    
   """
     scores: list of scores, where index is book id
     L: list of dicts, having properties of libraries
@@ -17,30 +26,40 @@ def run_algo(scores, L, d):
   # This is list of (id, score), whereas scores is list of score only
   #scores_sorted = sorted(enumerate(scores), key=lambda e: e[1], reverse=True)
 
+  scores_list = scores
+  scores_list.sort(reverse=True)
   final_result = []
-  while d <= 0:
-      
+  global flag_book_set
+#   L = sorted(LL, key=lambda e: e["rate"], reverse=True)
+#   print(L)
+#   print(LL)
+
+  while d != 0:
       if len(L) == 0:
           break
-      L_list = []
-      for library in L:
-          #book_list = get_flagged_books(library["books"])
-          book_score, book_id_list =score_list_sum(library["books"])
-          score = book_score*library["rate"]/library["signup"]
-          L_list.append([score, library["id"],  book_id_list, library["signup"]])
-      
-      L_sorted = sorted(L_list, key=lambda e: e[0], reverse=True)
-      selected_library = L_sorted[0]  
-      
-      for i in range(0, len(L)):
-          if L[i]["id"] == selected_library[1]:
-              remove_index= i
-              break
-      L.pop(remove_index)
-      d -= selected_library[3]
+      high_score = 0
+      for i in range(0,len(L)):
+          book_score =score_list_sum(L[i]["books"]) 
+          score = book_score * L[i]["rate"]/L[i]["signup"]
+          if score > high_score:
+              L_index = i
+              L_id = L[i]["id"]
+              high_score = score / L[i]["rate"]
+              book_list = L[i]["books"]
+              signup_days = L[i]["signup"]
+              
+          
+      L.pop(L_index)
+      d -= signup_days
+
+      book_sorted = get_book_order(book_list)
+      flag_book_set.update(book_list)
       final_result.append({
-            "lib_id": selected_library[1],
-            "books_order": selected_library[2]
+            "lib_id": L_id,
+            "books_order": [ book[0] for book in book_sorted ]
         })
-     
+      if d < 0:
+          break
+      
+#   print(final_result)  
   return final_result
