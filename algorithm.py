@@ -40,7 +40,7 @@ def run_algo(scores, L, d):
         #   score = (book_score / L[i]["signup"]) # for A B C D
         #   score = (book_score / L[i]["signup"] ** L[i]["rate"]) # for D
         #   score = book_score * L[i]["rate"] /L[i]["signup"] ** 3 #for E
-          score = (book_score  / L[i]["signup"] ** 2) ** (L[i]["rate"] / 3)  #for F
+         score = (book_score  / L[i]["signup"] ** 2) ** (L[i]["rate"] / 3)  #for F
           if score > high_score:
               L_index = i
               L_id = L[i]["id"]
