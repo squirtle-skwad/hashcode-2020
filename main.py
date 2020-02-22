@@ -7,5 +7,5 @@ OUTPUT_FILE = 'output_f'
 
 if __name__ == "__main__":
   scores, L, d = load_data(INPUT_FILE)
-  # run_algo(scores, L, d)
+  # print(L)
   write_to_output_file(run_algo(scores, L, d), OUTPUT_FILE)

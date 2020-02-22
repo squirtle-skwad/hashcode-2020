@@ -30,9 +30,6 @@ def run_algo(scores, L, d):
   scores_list.sort(reverse=True)
   final_result = []
   global flag_book_set
-#   L = sorted(LL, key=lambda e: e["rate"], reverse=True)
-#   print(L)
-#   print(LL)
 
   while d != 0:
       if len(L) == 0:
@@ -40,11 +37,14 @@ def run_algo(scores, L, d):
       high_score = 0
       for i in range(0,len(L)):
           book_score =score_list_sum(L[i]["books"]) 
-          score = book_score * L[i]["rate"]/L[i]["signup"]
+        #   score = (book_score / L[i]["signup"]) # for A B C D
+        #   score = (book_score / L[i]["signup"] ** L[i]["rate"]) # for D
+        #   score = book_score * L[i]["rate"] /L[i]["signup"] ** 3 #for E
+          score = (book_score  / L[i]["signup"] ** 2) ** (L[i]["rate"] / 3)  #for F
           if score > high_score:
               L_index = i
               L_id = L[i]["id"]
-              high_score = score / L[i]["rate"]
+              high_score = score 
               book_list = L[i]["books"]
               signup_days = L[i]["signup"]
               
